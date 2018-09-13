@@ -42,7 +42,7 @@ public class Server {
     // 将给点的输出流从共享集合中删除
     private synchronized void remove(String key) {
         stringPrintWriterMap.remove(key);
-        System.out.println("当前在线人数为: " + stringPrintWriterMap.size());
+        System.out.println("当前在线人数为: " + (stringPrintWriterMap.size() + 1));
     }
 
     // 将给定的消息转发给所有客户端
@@ -68,7 +68,7 @@ public class Server {
                 // 获取客户端的ip
                 InetAddress inetAddress = socket.getInetAddress();
                 System.out.println("客户端:" + inetAddress.getHostAddress() + "上线!");
-                System.out.println("当前聊天室在线人数为: " + stringPrintWriterMap.size());
+                System.out.println("当前聊天室在线人数为: " + (stringPrintWriterMap.size() + 1));
                 executorService.execute(new ListenerClient(socket));
             }
         } catch (UnsupportedEncodingException e) {
@@ -100,9 +100,9 @@ public class Server {
                 while (true) {
                     String nameString = bufferedReader.readLine();
                     if ((nameString.trim().length() == 0) || stringPrintWriterMap.containsKey(nameString)) {
-                        printWriter.println("昵称不合法或是已经存在!");
+                        printWriter.println("FAIL");
                     } else {
-                        printWriter.println("创建昵称成功!");
+                        printWriter.println("OK");
                         return nameString;
                     }
                 }
