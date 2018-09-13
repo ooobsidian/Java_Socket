@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 /**
  * @program: myChat
@@ -9,35 +10,49 @@ import java.net.Socket;
  * @create: 2018-09-13 00:01
  */
 public class Server {
-    public static void main(String... args) {
+    private ServerSocket serverSocket;
+
+    public Server() {
         try {
-            ServerSocket serverSocket = new ServerSocket(8080);
-            System.out.println("服务端已启动，等待客户端连接..");
-            Socket socket = serverSocket.accept();
-
-            InputStream inputStream = socket.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);    //提高效率，将自己字节流转为字符流
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String temp = null;
-            String info = "";
-            while ((temp = bufferedReader.readLine()) != null) {
-                info += temp;
-                System.out.println("已接收到客户端连接");
-                System.out.println("服务端接收到客户端信息：" + info + ",当前客户端ip为：" + socket.getInetAddress().getHostAddress());
-            }
-            OutputStream outputStream = socket.getOutputStream();
-            PrintWriter printWriter = new PrintWriter(outputStream);
-            printWriter.print("服务端已接收到您的信息");
-            printWriter.flush();
-            socket.shutdownOutput();
-
-            printWriter.close();
-            outputStream.close();
-            bufferedReader.close();
-            inputStream.close();
-            socket.close();
+            serverSocket = new ServerSocket(8080);
+            System.out.println("服务程序正在监听端口:" + serverSocket.getLocalPort());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void run() {
+        try {
+            System.out.println("等待客户端连接...");
+            Socket socket = serverSocket.accept();
+            System.out.println("客户端已连接");
+            InputStream inputStream = socket.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            OutputStream outputStream = socket.getOutputStream();
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
+            PrintWriter printWriter = new PrintWriter(outputStreamWriter, true);
+            Scanner scanner = new Scanner(System.in);
+            while (true) {
+                System.out.println("客户端发来一条消息: " + bufferedReader.readLine());
+                printWriter.println(scanner.nextLine());
+            }
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String... args) throws IOException {
+        Server server = new Server();
+        server.run();
+//        BufferedReader bufferedReader = new BufferedReader(
+//                new InputStreamReader(System.in));
+//
+//        System.out.print("请输入一系列文字，可包括空格：");
+//        String text = bufferedReader.readLine();
+//        System.out.println("请输入文字：" + text);
     }
 }
