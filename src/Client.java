@@ -37,7 +37,7 @@ public class Client {
             // 建立输出流,向服务端发送信息
             OutputStream outputStream = socket.getOutputStream();
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
-            PrintWriter printWriter = new PrintWriter(outputStreamWriter);
+            PrintWriter printWriter = new PrintWriter(outputStreamWriter,true);
             while (true) {
                 printWriter.println(scanner.nextLine());
             }
