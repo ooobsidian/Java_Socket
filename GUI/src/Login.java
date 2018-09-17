@@ -1,3 +1,5 @@
+import Socket.Client;
+
 import javax.swing.*;
 
 /**
@@ -17,5 +19,16 @@ public class Login {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+    }
+
+    public void setData(Client data) {
+
+    }
+
+    public void getData(Client data) {
+    }
+
+    public boolean isModified(Client data) {
+        return false;
     }
 }
