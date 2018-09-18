@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -22,7 +24,7 @@ public class Server {
 
 
     private Map<String, PrintWriter> stringPrintWriterMap;
-
+    static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 
     public Server() {
         try {
@@ -44,7 +46,7 @@ public class Server {
     // 将给点的输出流从共享集合中删除
     private synchronized void remove(String key) {
         stringPrintWriterMap.remove(key);
-        System.out.println("当前在线人数为: " + (stringPrintWriterMap.size() + 1));
+        System.out.println("【" + df.format(new Date()) + "】 " + "当前在线人数为: " + (stringPrintWriterMap.size() + 1));
     }
 
     // 将给定的消息转发给所有客户端
@@ -65,12 +67,12 @@ public class Server {
     public void run() {
         try {
             while (true) {
-                System.out.println("等待客户端连接...");
+                System.out.println("【" + df.format(new Date()) + "】 " + "等待客户端连接...");
                 Socket socket = serverSocket.accept();
                 // 获取客户端的ip
                 InetAddress inetAddress = socket.getInetAddress();
-                System.out.println("客户端:" + inetAddress.getHostAddress() + "上线!");
-                System.out.println("当前聊天室在线人数为: " + (stringPrintWriterMap.size() + 1));
+                System.out.println("【" + df.format(new Date()) + "】 " + "客户端:" + inetAddress.getHostAddress() + "上线!");
+                System.out.println("【" + df.format(new Date()) + "】 " + "当前聊天室在线人数为: " + (stringPrintWriterMap.size() + 1));
                 executorService.execute(new ListenerClient(socket));
             }
         } catch (UnsupportedEncodingException e) {
@@ -124,7 +126,7 @@ public class Server {
                 name = getName();
                 addClient(name, printWriter);
                 Thread.sleep(100);
-                sendMessageToAll("[系统通知]: " + name + "已上线!");
+                sendMessageToAll("【" + df.format(new Date()) + "】 "+ "[系统通知]: " + name + "已上线!");
                 // 通过客户端的Socket获取输入流
                 // 读取客户端发送来的信息
                 InputStream inputStream = socket.getInputStream();
@@ -161,7 +163,7 @@ public class Server {
             } finally {
                 remove(name);
                 // 通知所有用户,某用户已经下线
-                sendMessageToAll("[系统通知]: " + name + "已下线!");
+                sendMessageToAll("【" + df.format(new Date()) + "】 " + "[系统通知]: " + name + "已下线!");
                 if (socket != null) {
                     try {
                         socket.close();
