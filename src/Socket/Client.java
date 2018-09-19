@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -37,7 +38,7 @@ public class Client extends JFrame {
     static private Socket socket;
     private TextField textField = new TextField();
     private TextArea textArea = new TextArea();
-    private DataOutputStream dataOutputStream = null;
+    private static DataOutputStream dataOutputStream = null;
     static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 
     public Client() {
@@ -46,13 +47,14 @@ public class Client extends JFrame {
     public static void main(String... args) {
 //        new Client().launcFrame();
         JFrame f = new JFrame();
+        f.setLayout(null);
 
         //连接服务器的按钮
         final Button BConnect = new Button("连接服务器");
         BConnect.setBounds(10, 10, 100, 30);
 
         //系统消息框标签
-        Label lb1=new Label("----消息框----");
+        Label lb1 = new Label("----消息框----");
         lb1.setBounds(10, 55, 300, 20);
 
         //系统消息框
@@ -62,7 +64,7 @@ public class Client extends JFrame {
         ta.setBounds(10, 80, 400, 400);
 
         //当前在线好友列表标签
-        Label lb2=new Label("----在线好友列表----");
+        Label lb2 = new Label("----在线好友列表----");
         lb2.setBounds(450, 55, 200, 20);
 
         //当前在线好友列表
@@ -76,13 +78,12 @@ public class Client extends JFrame {
         //发送框
         final TextField tf = new TextField();
         tf.setEditable(true);
-        tf.setBounds(10, 500, 400, 20);
+        tf.setBounds(10, 500, 400, 30);
 
         //发送按钮
-        //TODO 发送按钮有问题
         final Button Bsend = new Button("发送");
-        Bsend.setBounds(450, 800, 50, 20);
-        Bsend.setEnabled(true);
+        Bsend.setBounds(480, 500, 80, 30);
+        Bsend.setEnabled(false);
 
         //将组件加入框架
         f.add(BConnect);
@@ -95,13 +96,40 @@ public class Client extends JFrame {
         f.add(Bsend);
 
 
-
         //设置框架属性
-        f.setSize(1100, 800);
+        f.setSize(700, 600);
         f.setVisible(true);
         f.setResizable(false);
         f.setTitle("iChat客户端");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //连接服务器
+        BConnect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    socket = new Socket("0.0.0.0", 8080);
+                    Client client = new Client();
+                    client.setName();
+                    dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                    JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_NO_CANCEL_OPTION);
+                    System.out.println("登录成功!");
+                    B8889.setEnabled(true);
+                    B8899.setEnabled(true);
+                    Bsend.setEnabled(true);
+                } catch (SocketTimeoutException e2) {
+                    JOptionPane.showMessageDialog(null, "登录超时!", "登录提示", JOptionPane.ERROR_MESSAGE);
+                } catch (UnknownHostException e1) {
+                    JOptionPane.showMessageDialog(null, "登录超时!", "登录提示", JOptionPane.ERROR_MESSAGE);
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(null, "登录失败!", "登录提示", JOptionPane.ERROR_MESSAGE);
+                    e1.printStackTrace();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
     }
 
@@ -205,34 +233,39 @@ public class Client extends JFrame {
 //        }
 //    }
 //
-//    private void setName(Scanner scanner) throws Exception {
-//        String name;
-//        // 创建输出流
-//        OutputStream outputStream = socket.getOutputStream();
-//        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
-//        PrintWriter printWriter = new PrintWriter(outputStreamWriter, true);
-//        // 创建输入流
-//        InputStream inputStream = socket.getInputStream();
-//        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-//        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//        while (true) {
-//            System.out.println("请创建你的昵称: ");
+    public static void setName() throws Exception {
+//        Scanner scanner = new Scanner(System.in);
+        String name;
+        // 创建输出流
+        OutputStream outputStream = socket.getOutputStream();
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
+        PrintWriter printWriter = new PrintWriter(outputStreamWriter, true);
+        // 创建输入流
+        InputStream inputStream = socket.getInputStream();
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        while (true) {
+            System.out.println("请创建你的昵称: ");
 //            name = scanner.nextLine();
-//            if (name.trim().equals("")) {
-//                System.out.println("昵称不得为空!");
-//            } else {
-//                printWriter.println(name);
-//                String pass = bufferedReader.readLine();
-//                if (pass != null && (!pass.equals("OK"))) {
-//                    System.out.println("该昵称已经被占用,请重新输入: ");
-//                } else {
-//                    System.out.println("昵称: \"" + name + "\"已设置成功,现在可以开始聊天啦!");
-//                    break;
-//                }
-//            }
-//        }
-//    }
-//
+            name = JOptionPane.showInputDialog("请创建你的昵称");
+            if (name.trim().equals("")) {
+                System.out.println("昵称不得为空!");
+                JOptionPane.showMessageDialog(null, "昵称不能为空", "错误", JOptionPane.ERROR_MESSAGE);
+            } else {
+                printWriter.println(name);
+                String pass = bufferedReader.readLine();
+                if (pass != null && (!pass.equals("OK"))) {
+                    JOptionPane.showMessageDialog(null, "该昵称已经被占用,请重新输入", "错误", JOptionPane.ERROR_MESSAGE);
+                    System.out.println("该昵称已经被占用,请重新输入: ");
+                } else {
+                    JOptionPane.showMessageDialog(null, "昵称: \"" + name + "\"已设置成功,现在可以开始聊天啦!", "成功", JOptionPane.YES_NO_CANCEL_OPTION);
+                    System.out.println("昵称: \"" + name + "\"已设置成功,现在可以开始聊天啦!");
+                    break;
+                }
+            }
+        }
+    }
+
 //    // 循环读取服务端发送过来的信息并输出到客户端的控制台
 //    class ListenerServser implements Runnable {
 //        @Override
