@@ -40,7 +40,7 @@ public class Client extends JFrame {
     private TextArea textArea = new TextArea();
     private static DataOutputStream dataOutputStream = null;
     static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-
+    static private boolean is_online = false;   //客户端是否在线标志
     public Client() {
     }
 
@@ -108,15 +108,21 @@ public class Client extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    socket = new Socket("0.0.0.0", 8080);
-                    Client client = new Client();
-                    client.setName();
-                    dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                    JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_NO_CANCEL_OPTION);
-                    System.out.println("登录成功!");
-                    B8889.setEnabled(true);
-                    B8899.setEnabled(true);
-                    Bsend.setEnabled(true);
+                    if (!is_online) {
+                        socket = new Socket("0.0.0.0", 8080);
+                        String userName = setName();
+                        dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                        JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_OPTION);
+                        ta.setText("【" + df.format(new Date()) + "】\n" + userName + "上线!");
+                        System.out.println("登录成功!");
+                        B8889.setEnabled(true);
+                        B8899.setEnabled(true);
+                        Bsend.setEnabled(true);
+                        is_online=true; // 设置该客户端已经在线
+                    } else {
+                        JOptionPane.showMessageDialog(null, "同一客户端不能重复登录!", "错误", JOptionPane.ERROR_MESSAGE);
+                    }
+
                 } catch (SocketTimeoutException e2) {
                     JOptionPane.showMessageDialog(null, "登录超时!", "登录提示", JOptionPane.ERROR_MESSAGE);
                 } catch (UnknownHostException e1) {
@@ -233,7 +239,7 @@ public class Client extends JFrame {
 //        }
 //    }
 //
-    public static void setName() throws Exception {
+    public static String setName() throws Exception {
 //        Scanner scanner = new Scanner(System.in);
         String name;
         // 创建输出流
@@ -264,6 +270,7 @@ public class Client extends JFrame {
                 }
             }
         }
+        return name;
     }
 
 //    // 循环读取服务端发送过来的信息并输出到客户端的控制台
