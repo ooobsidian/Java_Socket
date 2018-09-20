@@ -1,31 +1,18 @@
 package Socket;
 
-import sun.awt.X11.Screen;
-
 import javax.swing.*;
-import javax.xml.soap.Text;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.awt.BorderLayout;
-import java.awt.Frame;
 import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
@@ -39,8 +26,10 @@ public class Client extends JFrame {
     private TextField textField = new TextField();
     private TextArea textArea = new TextArea();
     private static DataOutputStream dataOutputStream = null;
+    static String current = null;
     static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
     static private boolean is_online = false;   //客户端是否在线标志
+
     public Client() {
     }
 
@@ -112,17 +101,15 @@ public class Client extends JFrame {
                         socket = new Socket("0.0.0.0", 8080);
                         String userName = setName();
                         dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                        JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_OPTION);
+                        JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_NO_OPTION);
                         ta.setText("【" + df.format(new Date()) + "】\n" + userName + "上线!");
                         System.out.println("登录成功!");
                         B8889.setEnabled(true);
                         B8899.setEnabled(true);
-                        Bsend.setEnabled(true);
-                        is_online=true; // 设置该客户端已经在线
+                        is_online = true; // 设置该客户端已经在线
                     } else {
                         JOptionPane.showMessageDialog(null, "同一客户端不能重复登录!", "错误", JOptionPane.ERROR_MESSAGE);
                     }
-
                 } catch (SocketTimeoutException e2) {
                     JOptionPane.showMessageDialog(null, "登录超时!", "登录提示", JOptionPane.ERROR_MESSAGE);
                 } catch (UnknownHostException e1) {
@@ -137,6 +124,34 @@ public class Client extends JFrame {
             }
         });
 
+        B8889.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                current = "8889";
+                Bsend.setEnabled(true);
+            }
+        });
+
+        B8889.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                current = "8899";
+                Bsend.setEnabled(true);
+            }
+        });
+
+        // 发送按钮功能
+        Bsend.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String message = tf.getText().trim();
+                sendMessage(message);
+                //TODO 获取用户昵称
+                ta.setText("【" + df.format(new Date()) + "】\n" + "userName" + ": " + message + "\n");
+                tf.setText(null);  //清空输入框
+                // TODO 对消息进行累加显示
+            }
+        });
     }
 
     //绘制聊天界面
@@ -186,27 +201,28 @@ public class Client extends JFrame {
 //        }
 //    }
 //
-//    public void sendMessage() {
-//        // 建立输出流,向服务端发送信息
+    public static void sendMessage(String message) {
+        // 建立输出流,向服务端发送信息
 //        Scanner scanner = new Scanner(System.in);
-//        OutputStream outputStream = null;
-//        try {
-//            outputStream = socket.getOutputStream();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        OutputStreamWriter outputStreamWriter = null;
-//        try {
-//            outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//        PrintWriter printWriter = new PrintWriter(outputStreamWriter, true);
+        OutputStream outputStream = null;
+        try {
+            outputStream = socket.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        OutputStreamWriter outputStreamWriter = null;
+        try {
+            outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        PrintWriter printWriter = new PrintWriter(outputStreamWriter, true);
 //        while (true) {
-//            printWriter.println(scanner.nextLine());
+        printWriter.println(message);
 //        }
-//    }
-//
+    }
+
+    //
 //    public void run() {
 //        try {
 //            Scanner scanner = new Scanner(System.in);
