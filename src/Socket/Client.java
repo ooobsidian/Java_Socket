@@ -102,7 +102,7 @@ public class Client extends JFrame {
                         String userName = setName();
                         dataOutputStream = new DataOutputStream(socket.getOutputStream());
                         JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_NO_OPTION);
-                        ta.setText("【" + df.format(new Date()) + "】\n" + userName + "上线!");
+                        ta.setText("【" + df.format(new Date()) + "】\n" + userName + "上线!\n");
                         System.out.println("登录成功!");
                         B8889.setEnabled(true);
                         B8899.setEnabled(true);
@@ -147,9 +147,8 @@ public class Client extends JFrame {
                 String message = tf.getText().trim();
                 sendMessage(message);
                 //TODO 获取用户昵称
-                ta.setText("【" + df.format(new Date()) + "】\n" + "userName" + ": " + message + "\n");
+                ta.appendText("【" + df.format(new Date()) + "】\n" + "userName" + ": " + message + "\n");
                 tf.setText(null);  //清空输入框
-                // TODO 对消息进行累加显示
             }
         });
     }
