@@ -14,6 +14,9 @@ import java.awt.event.ActionListener;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @program: myChat
@@ -30,6 +33,8 @@ public class Client extends JFrame {
     static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
     static private boolean is_online = false;   //客户端是否在线标志
     static String userName;
+    static TextArea ta;
+    static TextField tf;
 
     public static void setUserName(String userName) {
         Client.userName = userName;
@@ -62,7 +67,7 @@ public class Client extends JFrame {
         lb1.setBounds(10, 55, 300, 20);
 
         //系统消息框
-        final TextArea ta = new TextArea();
+        TextArea ta = new TextArea();
         ta.setBackground(Color.LIGHT_GRAY);
         ta.setEditable(false);
         ta.setBounds(10, 80, 400, 400);
@@ -107,6 +112,7 @@ public class Client extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (!is_online) {
+                        Client client=new Client();
                         socket = new Socket("0.0.0.0", 8080);
                         String userName = setName();
                         setUserName(userName);
@@ -117,6 +123,7 @@ public class Client extends JFrame {
                         System.out.println("登录成功!");
                         Bsend.setEnabled(true);
                         is_online = true; // 设置该客户端已经在线
+                        run();
                     } else {
                         JOptionPane.showMessageDialog(null, "同一客户端不能重复登录!", "错误", JOptionPane.ERROR_MESSAGE);
                     }
@@ -159,7 +166,7 @@ public class Client extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String message = tf.getText().trim();
-                if (message.length()==0) {
+                if (message.length() == 0) {
                     JOptionPane.showMessageDialog(null, "发送消息不能为空!", "错误", JOptionPane.ERROR_MESSAGE);
                 } else {
                     sendMessage(message);
@@ -169,6 +176,7 @@ public class Client extends JFrame {
                 }
             }
         });
+
     }
 
     //绘制聊天界面
@@ -242,18 +250,20 @@ public class Client extends JFrame {
     //
 //    public void run() {
 //        try {
-//            Scanner scanner = new Scanner(System.in);
-//            setName(scanner);
+////            Scanner scanner = new Scanner(System.in);
+////            setName(scanner);
 //            // 接收服务器端发送过来的信息的线程启动
 //            ExecutorService executorService = Executors.newCachedThreadPool();
 //            ListenerServser listenerServser = new ListenerServser();
 //            executorService.execute(listenerServser);
 //            // 建立输出流,向服务端发送信息
-////            OutputStream outputStream = socket.getOutputStream();
-////            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
-////            PrintWriter printWriter = new PrintWriter(outputStreamWriter,true);
+//            OutputStream outputStream = socket.getOutputStream();
+//            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
+//            PrintWriter printWriter = new PrintWriter(outputStreamWriter,true);
+//            printWriter.println();
 ////            while (true) {
-////                printWriter.println(scanner.nextLine());
+//    //            printWriter.println(scanner.nextLine());
+//    //            printWriter.println("【" + df.format(new Date()) + "】 "+message);
 ////            }
 //        } catch (UnsupportedEncodingException e) {
 //            e.printStackTrace();
@@ -306,36 +316,26 @@ public class Client extends JFrame {
         return name;
     }
 
-//    // 循环读取服务端发送过来的信息并输出到客户端的控制台
-//    class ListenerServser implements Runnable {
+    // 循环读取服务端发送过来的信息并输出到客户端的控制台
+//    static class ListenerServser implements Runnable {
 //        @Override
-//        public void run() {
-//            try {
-//                InputStream inputStream = socket.getInputStream();
-//                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-//                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//                String msgString;
-//                while ((msgString = bufferedReader.readLine()) != null) {
-//                    System.out.println(msgString);
-//                }
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+    public static void run() {
+        try {
+            InputStream inputStream = socket.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String msgString;
+            if ((msgString = bufferedReader.readLine()) != null) {
+                System.out.println(msgString);
+//                ta.append("【" + df.format(new Date()) + "】\n" + msgString);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 //    }
-//
-//    private class TFLister implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent event) {
-//            String text = textField.getText().trim();
-//            textArea.setText(text);
-//            textField.setText("");
-//            sendMessage();
-//        }
-//    }
-
 }
 
 
