@@ -49,8 +49,13 @@ public class Client extends JFrame {
         f.setLayout(null);
 
         //连接服务器的按钮
-        final Button BConnect = new Button("连接服务器");
+        final Button BConnect = new Button("上线");
         BConnect.setBounds(10, 10, 100, 30);
+
+        //断开服务器按钮
+        final Button BDisConnect = new Button("下线");
+        BDisConnect.setBounds(120, 10, 100, 30);
+        BDisConnect.setEnabled(false);
 
         //系统消息框标签
         Label lb1 = new Label("----消息框----");
@@ -81,6 +86,7 @@ public class Client extends JFrame {
 
         //将组件加入框架
         f.add(BConnect);
+        f.add(BDisConnect);
         f.add(lb1);
         f.add(ta);
         f.add(lb2);
@@ -106,7 +112,8 @@ public class Client extends JFrame {
                         setUserName(userName);
                         dataOutputStream = new DataOutputStream(socket.getOutputStream());
                         JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_NO_OPTION);
-                        ta.setText("【" + df.format(new Date()) + "】\n" + userName + "上线!\n");
+                        ta.append("【" + df.format(new Date()) + "】\n" + userName + "上线!\n");
+                        BDisConnect.setEnabled(true);
                         System.out.println("登录成功!");
                         Bsend.setEnabled(true);
                         is_online = true; // 设置该客户端已经在线
@@ -127,6 +134,26 @@ public class Client extends JFrame {
             }
         });
 
+        //断开服务器
+        BDisConnect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    dataOutputStream.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                try {
+                    socket.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                ta.append("【" + df.format(new Date()) + "】\n" + userName + "下线!\n");
+                BDisConnect.setEnabled(false);
+                Bsend.setEnabled(false);
+            }
+        });
+
         // 发送按钮功能
         Bsend.addActionListener(new ActionListener() {
             @Override
@@ -137,7 +164,7 @@ public class Client extends JFrame {
                 } else {
                     sendMessage(message);
                     //TODO 获取用户昵称
-                    ta.appendText("【" + df.format(new Date()) + "】\n" + getUserName() + ": " + message + "\n");
+                    ta.append("【" + df.format(new Date()) + "】\n" + getUserName() + ": " + message + "\n");
                     tf.setText(null);  //清空输入框
                 }
             }
