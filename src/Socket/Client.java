@@ -29,6 +29,16 @@ public class Client extends JFrame {
     static String current = null;
     static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
     static private boolean is_online = false;   //客户端是否在线标志
+    static String userName;
+
+    public static void setUserName(String userName) {
+        Client.userName = userName;
+    }
+
+    public static String getUserName() {
+        return userName;
+
+    }
 
     public Client() {
     }
@@ -57,12 +67,7 @@ public class Client extends JFrame {
         lb2.setBounds(450, 55, 200, 20);
 
         //当前在线好友列表
-        final Button B8889 = new Button("8889");
-        B8889.setBounds(450, 80, 200, 20);
-        B8889.setEnabled(false);
-        final Button B8899 = new Button("8899");
-        B8899.setBounds(450, 120, 200, 20);
-        B8899.setEnabled(false);
+
 
         //发送框
         final TextField tf = new TextField();
@@ -80,8 +85,6 @@ public class Client extends JFrame {
         f.add(ta);
         f.add(lb2);
         f.add(tf);
-        f.add(B8889);
-        f.add(B8899);
         f.add(Bsend);
 
 
@@ -100,12 +103,12 @@ public class Client extends JFrame {
                     if (!is_online) {
                         socket = new Socket("0.0.0.0", 8080);
                         String userName = setName();
+                        setUserName(userName);
                         dataOutputStream = new DataOutputStream(socket.getOutputStream());
                         JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_NO_OPTION);
                         ta.setText("【" + df.format(new Date()) + "】\n" + userName + "上线!\n");
                         System.out.println("登录成功!");
-                        B8889.setEnabled(true);
-                        B8899.setEnabled(true);
+                        Bsend.setEnabled(true);
                         is_online = true; // 设置该客户端已经在线
                     } else {
                         JOptionPane.showMessageDialog(null, "同一客户端不能重复登录!", "错误", JOptionPane.ERROR_MESSAGE);
@@ -124,31 +127,19 @@ public class Client extends JFrame {
             }
         });
 
-        B8889.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                current = "8889";
-                Bsend.setEnabled(true);
-            }
-        });
-
-        B8889.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                current = "8899";
-                Bsend.setEnabled(true);
-            }
-        });
-
         // 发送按钮功能
         Bsend.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String message = tf.getText().trim();
-                sendMessage(message);
-                //TODO 获取用户昵称
-                ta.appendText("【" + df.format(new Date()) + "】\n" + "userName" + ": " + message + "\n");
-                tf.setText(null);  //清空输入框
+                if (message.length()==0) {
+                    JOptionPane.showMessageDialog(null, "发送消息不能为空!", "错误", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    sendMessage(message);
+                    //TODO 获取用户昵称
+                    ta.appendText("【" + df.format(new Date()) + "】\n" + getUserName() + ": " + message + "\n");
+                    tf.setText(null);  //清空输入框
+                }
             }
         });
     }
