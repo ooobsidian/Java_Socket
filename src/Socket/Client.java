@@ -325,7 +325,7 @@ public class Client extends JFrame {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String msgString;
-            if ((msgString = bufferedReader.readLine()) != null) {
+            while ((msgString = bufferedReader.readLine()) != null) { //TODO while这里有点问题
                 System.out.println(msgString);
 //                ta.append("【" + df.format(new Date()) + "】\n" + msgString);
             }

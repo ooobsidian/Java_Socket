@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -46,11 +47,11 @@ public class Server {
     // 将给点的输出流从共享集合中删除
     private synchronized void remove(String key) {
         stringPrintWriterMap.remove(key);
-        System.out.println("【" + df.format(new Date()) + "】 " + "当前在线人数为: " + (stringPrintWriterMap.size() + 1));
+        System.out.println("【" + df.format(new Date()) + "】 " + "当前在线人数为: " + (stringPrintWriterMap.size()));
     }
 
     // 将给定的消息转发给所有客户端
-    private synchronized void sendMessageToAll(String message) {
+    public synchronized void sendMessageToAll(String message) {
         for (PrintWriter out : stringPrintWriterMap.values()) {
             out.println(message);
         }
@@ -64,8 +65,13 @@ public class Server {
         }
     }
 
+    private synchronized void ServerSendMessageToClient(String notice) {
+        sendMessageToAll("【" + df.format(new Date()) + "】 " + "服务端: " + notice);
+    }
+
     public void run() {
         try {
+
             while (true) {
                 System.out.println("【" + df.format(new Date()) + "】 " + "等待客户端连接...");
                 Socket socket = serverSocket.accept();
@@ -126,13 +132,19 @@ public class Server {
                 name = getName();
                 addClient(name, printWriter);
                 Thread.sleep(100);
-                sendMessageToAll("【" + df.format(new Date()) + "】 "+ "[系统通知]: " + name + "已上线!");
+                sendMessageToAll("【" + df.format(new Date()) + "】 " + "[系统通知]: " + name + "已上线!");
+                // 读入服务端消息
+                //TODO 无法读入服务端输入,读入之后就会和其他东西冲突,把原来if改成while能循环读入服务器的消息,但是会将客户端卡死
+                Scanner in = new Scanner(System.in);
+                String notice = in.nextLine();
+                ServerSendMessageToClient(notice);
                 // 通过客户端的Socket获取输入流
                 // 读取客户端发送来的信息
                 InputStream inputStream = socket.getInputStream();
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String msgString = null;
+
 
                 while ((msgString = bufferedReader.readLine()) != null) {
                     // 检验是否为私聊(格式: @昵称:内容)
