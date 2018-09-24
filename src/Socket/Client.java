@@ -123,7 +123,7 @@ public class Client extends JFrame {
                         System.out.println("登录成功!");
                         Bsend.setEnabled(true);
                         is_online = true; // 设置该客户端已经在线
-                        run();
+                        run(); //TODO 启动一个线程
                     } else {
                         JOptionPane.showMessageDialog(null, "同一客户端不能重复登录!", "错误", JOptionPane.ERROR_MESSAGE);
                     }
@@ -170,7 +170,6 @@ public class Client extends JFrame {
                     JOptionPane.showMessageDialog(null, "发送消息不能为空!", "错误", JOptionPane.ERROR_MESSAGE);
                 } else {
                     sendMessage(message);
-                    //TODO 获取用户昵称
                     ta.append("【" + df.format(new Date()) + "】\n" + getUserName() + ": " + message + "\n");
                     tf.setText(null);  //清空输入框
                 }
