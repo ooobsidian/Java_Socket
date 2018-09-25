@@ -186,7 +186,7 @@ public class Client extends JFrame {
 
     public static void sendMessage(String message) {
         // 建立输出流,向服务端发送信息
-//        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         OutputStream outputStream = null;
         try {
             outputStream = socket.getOutputStream();
@@ -209,7 +209,7 @@ public class Client extends JFrame {
     public void start() {
         try {
             Scanner scanner = new Scanner(System.in);
-//            setName(scanner);
+            setName(scanner);
             // 接收服务器端发送过来的信息的线程启动
             ExecutorService executorService = Executors.newCachedThreadPool();
             ListenerServser listenerServser = new ListenerServser();
@@ -220,10 +220,6 @@ public class Client extends JFrame {
             while (true) {
                 printWriter.println(scanner.nextLine());
             }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -237,7 +233,7 @@ public class Client extends JFrame {
         }
     }
 
-    public static String setName() throws Exception {
+    public static String setName(Scanner scanner) throws Exception {
 //        Scanner scanner = new Scanner(System.in);
         String name;
         // 创建输出流
@@ -246,8 +242,8 @@ public class Client extends JFrame {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
         while (true) {
             System.out.println("请创建你的昵称: ");
-//            name = scanner.nextLine();
-            name = JOptionPane.showInputDialog("请创建你的昵称");
+            name = scanner.nextLine();
+//            name = JOptionPane.showInputDialog("请创建你的昵称");
             if (name.trim().equals("")) {
                 System.out.println("昵称不得为空!");
                 JOptionPane.showMessageDialog(null, "昵称不能为空", "错误", JOptionPane.ERROR_MESSAGE);
@@ -276,7 +272,7 @@ public class Client extends JFrame {
                 String msgString;
                 while ((msgString = bufferedReader.readLine()) != null) {  //TODO while->if
                     System.out.println(msgString);
-                    ta.append("【" + df.format(new Date()) + "】\n" + msgString);
+//                    ta.append("【" + df.format(new Date()) + "】\n" + msgString);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

@@ -1,5 +1,6 @@
 package Socket;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -62,11 +63,9 @@ public class Server {
         PrintWriter printWriter = stringPrintWriterMap.get(name);
         if (printWriter != null) {
             printWriter.println(message);
+        } else if (printWriter == null) {
+            JOptionPane.showMessageDialog(null, "用户\"" + name + "\"不在线或不存在!", "错误", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    private synchronized void ServerSendMessageToClient(String notice) {
-        sendMessageToAll("【" + df.format(new Date()) + "】 " + "服务器: " + notice);
     }
 
     public void start() {
@@ -82,20 +81,19 @@ public class Server {
                 executorService.execute(new ListenerClient(socket)); //通过线程池来分配线程
                 /***自己写****/
                 Scanner in = new Scanner(System.in);
-                while (true) {
-                    String notice = in.nextLine();
-                    if (notice != null)
-                        ServerSendMessageToClient(notice);
-                }
-
+                String notice = in.nextLine();
+                if (notice != null)
+                    sendMessageToAll("【" + df.format(new Date()) + "】 " + "服务器: " + notice);
             }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 该线程体用来处理给定的某一个客户端的消息，循环接收客户端发送
+     * 的每一个字符串，并输出到控制台
+     */
     class ListenerClient implements Runnable {
         private Socket socket;
         private String name;
@@ -109,7 +107,7 @@ public class Server {
                 // 服务端的输入读取客户端发送的昵称输出流
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
                 // 服务端将昵称验证结果通过自身输出流发送给客户端
-                PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"),true);
+                PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
                 // 读取客户端发来的昵称
                 while (true) {
                     String nameString = bufferedReader.readLine();
@@ -137,9 +135,9 @@ public class Server {
                 sendMessageToAll("【" + df.format(new Date()) + "】 " + "[系统通知]: " + name + "已上线!");
                 // 读入服务端消息
                 //TODO 无法读入服务端输入,读入之后就会和其他东西冲突,把原来if改成while能循环读入服务器的消息,但是会将客户端卡死
-//                Scanner in = new Scanner(System.in);
-//                String notice = in.nextLine();
-//                ServerSendMessageToClient(notice);
+                Scanner in = new Scanner(System.in);
+                String notice = in.nextLine();
+                sendMessageToAll("【" + df.format(new Date()) + "】 " + "服务器: " + notice);
                 // 通过客户端的Socket获取输入流
                 // 读取客户端发送来的信息
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
@@ -164,12 +162,6 @@ public class Server {
                     System.out.println(name + ": " + msgString);
                     sendMessageToAll(name + ": " + msgString);
                 }
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -187,7 +179,7 @@ public class Server {
         }
     }
 
-    public static void main(String... args){
+    public static void main(String... args) {
         Server server = new Server();
         server.start();
     }
