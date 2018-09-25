@@ -112,7 +112,7 @@ public class Client extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (!is_online) {
-                        Client client=new Client();
+                        Client client = new Client();
                         socket = new Socket("0.0.0.0", 8080);
                         String userName = setName();
                         setUserName(userName);
@@ -123,7 +123,7 @@ public class Client extends JFrame {
                         System.out.println("登录成功!");
                         Bsend.setEnabled(true);
                         is_online = true; // 设置该客户端已经在线
-                        run(); //TODO 启动一个线程
+                        client.start(); //TODO 启动一个线程
                     } else {
                         JOptionPane.showMessageDialog(null, "同一客户端不能重复登录!", "错误", JOptionPane.ERROR_MESSAGE);
                     }
@@ -215,16 +215,6 @@ public class Client extends JFrame {
 //
 //    }
 //
-//    //关闭客户端资源
-//    public void disConnect() {
-//        try {
-//            dataOutputStream.close();
-//            socket.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
     public static void sendMessage(String message) {
         // 建立输出流,向服务端发送信息
 //        Scanner scanner = new Scanner(System.in);
@@ -246,41 +236,39 @@ public class Client extends JFrame {
 //        }
     }
 
-    //
-//    public void run() {
-//        try {
-////            Scanner scanner = new Scanner(System.in);
-////            setName(scanner);
-//            // 接收服务器端发送过来的信息的线程启动
-//            ExecutorService executorService = Executors.newCachedThreadPool();
-//            ListenerServser listenerServser = new ListenerServser();
-//            executorService.execute(listenerServser);
-//            // 建立输出流,向服务端发送信息
-//            OutputStream outputStream = socket.getOutputStream();
-//            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
-//            PrintWriter printWriter = new PrintWriter(outputStreamWriter,true);
-//            printWriter.println();
-////            while (true) {
-//    //            printWriter.println(scanner.nextLine());
-//    //            printWriter.println("【" + df.format(new Date()) + "】 "+message);
-////            }
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (socket != null) {
-//                try {
-//                    socket.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
+
+    public void start() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+//            setName(scanner);
+            // 接收服务器端发送过来的信息的线程启动
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            ListenerServser listenerServser = new ListenerServser();
+            executorService.execute(listenerServser);
+            // 建立输出流,向服务端发送信息
+            OutputStream outputStream = socket.getOutputStream();
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
+            PrintWriter printWriter = new PrintWriter(outputStreamWriter, true);
+            while (true) {
+                printWriter.println(scanner.nextLine());
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (socket != null) {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public static String setName() throws Exception {
 //        Scanner scanner = new Scanner(System.in);
         String name;
@@ -301,7 +289,7 @@ public class Client extends JFrame {
                 JOptionPane.showMessageDialog(null, "昵称不能为空", "错误", JOptionPane.ERROR_MESSAGE);
             } else {
                 printWriter.println(name);
-                String pass = bufferedReader.readLine();
+                String pass = bufferedReader.readLine(); //TODO   ???为什么登录第二个客户端在这里就会出错
                 if (pass != null && (!pass.equals("OK"))) {
                     JOptionPane.showMessageDialog(null, "该昵称已经被占用,请重新输入", "错误", JOptionPane.ERROR_MESSAGE);
                     System.out.println("该昵称已经被占用,请重新输入: ");
@@ -316,25 +304,25 @@ public class Client extends JFrame {
     }
 
     // 循环读取服务端发送过来的信息并输出到客户端的控制台
-//    static class ListenerServser implements Runnable {
-//        @Override
-    public static void run() {
-        try {
-            InputStream inputStream = socket.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String msgString;
-            while ((msgString = bufferedReader.readLine()) != null) { //TODO while这里有点问题
-                System.out.println(msgString);
-//                ta.append("【" + df.format(new Date()) + "】\n" + msgString);
+    class ListenerServser implements Runnable {
+        @Override
+        public void run() {
+            try {
+                InputStream inputStream = socket.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String msgString;
+                while ((msgString = bufferedReader.readLine()) != null) {
+                    System.out.println(msgString);
+//                    ta.append("【" + df.format(new Date()) + "】\n" + msgString);
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
-//    }
 }
 
 

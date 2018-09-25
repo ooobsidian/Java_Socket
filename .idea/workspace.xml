@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="762bb98b-897c-48d2-8d30-49c7ac50ef85" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Client$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Client$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Client$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Client$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Client$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Client$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Client$ListenerServser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Client$ListenerServser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Server$ListenerClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Server$ListenerClient.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Socket/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Socket/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Socket/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Socket/Server.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,8 +26,12 @@
       <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Socket/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1144">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="83">
+              <caret line="85" selection-start-line="85" selection-end-line="85" />
+              <folding>
+                <element signature="e#2979#2980#0" expanded="true" />
+                <element signature="e#3023#3024#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -33,10 +39,9 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Socket/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="129" column="53" lean-forward="true" selection-start-line="129" selection-start-column="53" selection-end-line="129" selection-end-column="53" />
+            <state relative-caret-position="191">
+              <caret line="291" selection-start-line="291" selection-end-line="291" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="e#1180#1181#0" expanded="true" />
                 <element signature="e#1222#1223#0" expanded="true" />
               </folding>
@@ -67,6 +72,8 @@
       <find>exec</find>
       <find>run</find>
       <find>ListenerServser</find>
+      <find>BDisConnect</find>
+      <find>if</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -102,42 +109,15 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="288" />
-    <option name="y" value="76" />
-    <option name="width" value="1380" />
-    <option name="height" value="1004" />
+    <option name="x" value="79" />
+    <option name="width" value="1841" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="AndroidView" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Java_Socket" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Java_Socket" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Java_Socket" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Java_Socket" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Java_Socket" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Java_Socket" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Socket" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -145,7 +125,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="copyright" />
@@ -290,11 +270,14 @@
       <workItem from="1537545739310" duration="4035000" />
       <workItem from="1537629813507" duration="654000" />
       <workItem from="1537800978794" duration="5626000" />
+      <workItem from="1537849601771" duration="159000" />
+      <workItem from="1537849795910" duration="244000" />
+      <workItem from="1537850266006" duration="4339000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95788000" />
+    <option name="totallyTimeSpent" value="102309000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -315,59 +298,29 @@
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5002789" side_tool="true" weight="0.3985043" />
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49972114" weight="0.32692307" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3273305" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32838982" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.15672058" />
       <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32944915" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49972114" visible="true" weight="0.3985043" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3993644" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32944915" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3273305" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15672058" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32944915" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32944915" />
-      <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32838982" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3993644" />
-      <window_info id="Capture Tool" order="6" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32804233" />
-      <window_info anchor="right" id="Maven Projects" order="7" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -377,26 +330,30 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="36" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Socket/Server.java</url>
+          <line>83</line>
+          <properties />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Socket/Client.java</url>
+          <line>275</line>
+          <properties />
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Socket/Client.java</url>
+          <line>291</line>
+          <properties />
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="49" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Socket/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1180#1181#0" expanded="true" />
-            <element signature="e#1222#1223#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GUI/src/Login.java" />
-    <entry file="file://$PROJECT_DIR$/GUI/src/Login.form" />
-    <entry file="file://$PROJECT_DIR$/GUI/src/Regist.java" />
-    <entry file="file://$PROJECT_DIR$/GUI/src/Regist.form" />
     <entry file="file://$PROJECT_DIR$/GUI/src/Client.java" />
     <entry file="file://$PROJECT_DIR$/GUI/src/Client.form" />
     <entry file="file://$PROJECT_DIR$/src/Socket/Login.java">
@@ -417,11 +374,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1180#1181#0" expanded="true" />
-            <element signature="e#1222#1223#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -437,11 +389,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1180#1181#0" expanded="true" />
-            <element signature="e#1222#1223#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -531,114 +478,85 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Socket/ListenerServser.java" />
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/util/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="239" column="6" selection-start-line="239" selection-start-column="6" selection-end-line="239" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/net/PlainSocketImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="104" column="16" selection-start-line="104" selection-start-column="16" selection-end-line="104" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/security/AccessControlContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="558" selection-start-line="558" selection-end-line="558" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/security/AccessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="825" selection-start-line="825" selection-end-line="825" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/Container.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="225" selection-start-line="225" selection-end-line="225" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/Frame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="385" selection-start-line="385" selection-end-line="385" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/javax/swing/JFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="144" selection-start-line="144" selection-end-line="144" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/TextComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="129" selection-start-line="129" selection-end-line="129" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/lang/Object.java">
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/util/Map.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/net/PlainSocketImpl.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/security/AccessControlContext.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/security/AccessController.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/Container.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/Window.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/Frame.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/javax/swing/JFrame.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/TextComponent.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/lang/Object.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/Component.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/TextField.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/lang/Thread.java" />
+    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="36" selection-start-line="36" selection-end-line="36" />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/Component.java">
+    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="334" selection-start-line="334" selection-end-line="334" />
+        <state relative-caret-position="389">
+          <caret line="826" selection-start-line="826" selection-end-line="826" />
           <folding>
-            <element signature="e#33177#33178#0" expanded="true" />
-            <element signature="e#33232#33233#0" expanded="true" />
+            <element signature="e#22786#22787#0" expanded="true" />
+            <element signature="e#22821#22822#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/TextField.java">
+    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/AbstractStringBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="200" selection-start-line="200" selection-end-line="200" />
+        <state relative-caret-position="213">
+          <caret line="450" selection-start-line="450" selection-end-line="450" />
+          <folding>
+            <element signature="e#1327#1328#0" expanded="true" />
+            <element signature="e#1369#1370#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/lang/Thread.java">
+    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/StringBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="747" selection-start-line="747" selection-end-line="747" />
+        <state relative-caret-position="191">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
+          <folding>
+            <element signature="e#2871#2872#0" expanded="true" />
+            <element signature="e#2896#2897#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/util/Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="165" selection-start-line="165" selection-end-line="165" />
+          <folding>
+            <element signature="e#6390#6391#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Socket/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1144">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="83">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
+          <folding>
+            <element signature="e#2979#2980#0" expanded="true" />
+            <element signature="e#3023#3024#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Socket/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="129" column="53" lean-forward="true" selection-start-line="129" selection-start-column="53" selection-end-line="129" selection-end-column="53" />
+        <state relative-caret-position="191">
+          <caret line="291" selection-start-line="291" selection-end-line="291" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="e#1180#1181#0" expanded="true" />
             <element signature="e#1222#1223#0" expanded="true" />
           </folding>

@@ -66,10 +66,10 @@ public class Server {
     }
 
     private synchronized void ServerSendMessageToClient(String notice) {
-        sendMessageToAll("【" + df.format(new Date()) + "】 " + "服务端: " + notice);
+        sendMessageToAll("【" + df.format(new Date()) + "】 " + "服务器: " + notice);
     }
 
-    public void run() {
+    public void start() {
         try {
 
             while (true) {
@@ -80,6 +80,14 @@ public class Server {
                 System.out.println("【" + df.format(new Date()) + "】 " + "客户端:" + inetAddress.getHostAddress() + "上线!");
                 System.out.println("【" + df.format(new Date()) + "】 " + "当前聊天室在线人数为: " + (stringPrintWriterMap.size() + 1));
                 executorService.execute(new ListenerClient(socket));
+                /***自己写****/
+                Scanner in = new Scanner(System.in);
+                while (true) {
+                    String notice = in.nextLine();
+                    if (notice != null)
+                        ServerSendMessageToClient(notice);
+                }
+
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -135,9 +143,9 @@ public class Server {
                 sendMessageToAll("【" + df.format(new Date()) + "】 " + "[系统通知]: " + name + "已上线!");
                 // 读入服务端消息
                 //TODO 无法读入服务端输入,读入之后就会和其他东西冲突,把原来if改成while能循环读入服务器的消息,但是会将客户端卡死
-                Scanner in = new Scanner(System.in);
-                String notice = in.nextLine();
-                ServerSendMessageToClient(notice);
+//                Scanner in = new Scanner(System.in);
+//                String notice = in.nextLine();
+//                ServerSendMessageToClient(notice);
                 // 通过客户端的Socket获取输入流
                 // 读取客户端发送来的信息
                 InputStream inputStream = socket.getInputStream();
@@ -189,6 +197,6 @@ public class Server {
 
     public static void main(String... args) throws IOException {
         Server server = new Server();
-        server.run();
+        server.start();
     }
 }
