@@ -23,7 +23,7 @@ public class Server {
 
     private ExecutorService executorService;
 
-
+    // 存放客户端之间私聊的信息
     private Map<String, PrintWriter> stringPrintWriterMap;
     static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 
@@ -79,7 +79,7 @@ public class Server {
                 InetAddress inetAddress = socket.getInetAddress();
                 System.out.println("【" + df.format(new Date()) + "】 " + "客户端:" + inetAddress.getHostAddress() + "上线!");
                 System.out.println("【" + df.format(new Date()) + "】 " + "当前聊天室在线人数为: " + (stringPrintWriterMap.size() + 1));
-                executorService.execute(new ListenerClient(socket));
+                executorService.execute(new ListenerClient(socket)); //通过线程池来分配线程
                 /***自己写****/
                 Scanner in = new Scanner(System.in);
                 while (true) {
@@ -107,13 +107,9 @@ public class Server {
         private String getName() throws Exception {
             try {
                 // 服务端的输入读取客户端发送的昵称输出流
-                InputStream inputStream = socket.getInputStream();
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
                 // 服务端将昵称验证结果通过自身输出流发送给客户端
-                OutputStream outputStream = socket.getOutputStream();
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
-                PrintWriter printWriter = new PrintWriter(outputStreamWriter, true);
+                PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"),true);
                 // 读取客户端发来的昵称
                 while (true) {
                     String nameString = bufferedReader.readLine();
@@ -133,9 +129,7 @@ public class Server {
         public void run() {
             try {
                 // 通过客户端的Socket获取客户端的输出流
-                OutputStream outputStream = socket.getOutputStream();
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
-                PrintWriter printWriter = new PrintWriter(outputStreamWriter, true);
+                PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
                 //将客户昵称和其所发送的内容存在共享集合HashMap中
                 name = getName();
                 addClient(name, printWriter);
@@ -148,9 +142,7 @@ public class Server {
 //                ServerSendMessageToClient(notice);
                 // 通过客户端的Socket获取输入流
                 // 读取客户端发送来的信息
-                InputStream inputStream = socket.getInputStream();
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
                 String msgString = null;
 
 
@@ -195,7 +187,7 @@ public class Server {
         }
     }
 
-    public static void main(String... args) throws IOException {
+    public static void main(String... args){
         Server server = new Server();
         server.start();
     }

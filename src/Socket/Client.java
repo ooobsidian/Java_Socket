@@ -48,173 +48,142 @@ public class Client extends JFrame {
     public Client() {
     }
 
-    public static void main(String... args) {
-//        new Client().launcFrame();
-        JFrame f = new JFrame();
-        f.setLayout(null);
-
-        //连接服务器的按钮
-        final Button BConnect = new Button("上线");
-        BConnect.setBounds(10, 10, 100, 30);
-
-        //断开服务器按钮
-        final Button BDisConnect = new Button("下线");
-        BDisConnect.setBounds(120, 10, 100, 30);
-        BDisConnect.setEnabled(false);
-
-        //系统消息框标签
-        Label lb1 = new Label("----消息框----");
-        lb1.setBounds(10, 55, 300, 20);
-
-        //系统消息框
-        TextArea ta = new TextArea();
-        ta.setBackground(Color.LIGHT_GRAY);
-        ta.setEditable(false);
-        ta.setBounds(10, 80, 400, 400);
-
-        //当前在线好友列表标签
-        Label lb2 = new Label("----在线好友列表----");
-        lb2.setBounds(450, 55, 200, 20);
-
-        //当前在线好友列表
-
-
-        //发送框
-        final TextField tf = new TextField();
-        tf.setEditable(true);
-        tf.setBounds(10, 500, 400, 30);
-
-        //发送按钮
-        final Button Bsend = new Button("发送");
-        Bsend.setBounds(480, 500, 80, 30);
-        Bsend.setEnabled(false);
-
-        //将组件加入框架
-        f.add(BConnect);
-        f.add(BDisConnect);
-        f.add(lb1);
-        f.add(ta);
-        f.add(lb2);
-        f.add(tf);
-        f.add(Bsend);
-
-
-        //设置框架属性
-        f.setSize(700, 600);
-        f.setVisible(true);
-        f.setResizable(false);
-        f.setTitle("iChat客户端");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //连接服务器
-        BConnect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    if (!is_online) {
-                        Client client = new Client();
-                        socket = new Socket("0.0.0.0", 8080);
-                        String userName = setName();
-                        setUserName(userName);
-                        dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                        JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_NO_OPTION);
-                        ta.append("【" + df.format(new Date()) + "】\n" + userName + "上线!\n");
-                        BDisConnect.setEnabled(true);
-                        System.out.println("登录成功!");
-                        Bsend.setEnabled(true);
-                        is_online = true; // 设置该客户端已经在线
-                        client.start(); //TODO 启动一个线程
-                    } else {
-                        JOptionPane.showMessageDialog(null, "同一客户端不能重复登录!", "错误", JOptionPane.ERROR_MESSAGE);
-                    }
-                } catch (SocketTimeoutException e2) {
-                    JOptionPane.showMessageDialog(null, "登录超时!", "登录提示", JOptionPane.ERROR_MESSAGE);
-                } catch (UnknownHostException e1) {
-                    JOptionPane.showMessageDialog(null, "登录超时!", "登录提示", JOptionPane.ERROR_MESSAGE);
-                    e1.printStackTrace();
-                } catch (IOException e1) {
-                    JOptionPane.showMessageDialog(null, "登录失败!", "登录提示", JOptionPane.ERROR_MESSAGE);
-                    e1.printStackTrace();
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-
-        //断开服务器
-        BDisConnect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    dataOutputStream.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                try {
-                    socket.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                ta.append("【" + df.format(new Date()) + "】\n" + userName + "下线!\n");
-                BDisConnect.setEnabled(false);
-                Bsend.setEnabled(false);
-            }
-        });
-
-        // 发送按钮功能
-        Bsend.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String message = tf.getText().trim();
-                if (message.length() == 0) {
-                    JOptionPane.showMessageDialog(null, "发送消息不能为空!", "错误", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    sendMessage(message);
-                    ta.append("【" + df.format(new Date()) + "】\n" + getUserName() + ": " + message + "\n");
-                    tf.setText(null);  //清空输入框
-                }
-            }
-        });
-
+    public static void main(String... args) throws IOException {
+        socket = new Socket("0.0.0.0", 8080);
+        Client client = new Client();
+        client.start();
     }
 
-    //绘制聊天界面
-//    public void launcFrame() {
-//        setLocation(300, 400);
-//        this.setSize(200, 400);
-//        add(textField, BorderLayout.SOUTH);
-//        add(textArea, BorderLayout.NORTH);
-//        pack();
-//        // 监听图形界面窗口的关闭事件
-//        this.addWindowListener(new WindowAdapter() {
+//    public static void main(String... args) {
+////        new Client().launcFrame();
+//        JFrame f = new JFrame();
+//        f.setLayout(null);
+//
+//        //连接服务器的按钮
+//        final Button BConnect = new Button("上线");
+//        BConnect.setBounds(10, 10, 100, 30);
+//
+//        //断开服务器按钮
+//        final Button BDisConnect = new Button("下线");
+//        BDisConnect.setBounds(120, 10, 100, 30);
+//        BDisConnect.setEnabled(false);
+//
+//        //系统消息框标签
+//        Label lb1 = new Label("----消息框----");
+//        lb1.setBounds(10, 55, 300, 20);
+//
+//        //系统消息框
+//        TextArea ta = new TextArea();
+//        ta.setBackground(Color.LIGHT_GRAY);
+//        ta.setEditable(false);
+//        ta.setBounds(10, 80, 400, 400);
+//
+//        //当前在线好友列表标签
+//        Label lb2 = new Label("----在线好友列表----");
+//        lb2.setBounds(450, 55, 200, 20);
+//
+//        //当前在线好友列表
+//
+//
+//        //发送框
+//        final TextField tf = new TextField();
+//        tf.setEditable(true);
+//        tf.setBounds(10, 500, 400, 30);
+//
+//        //发送按钮
+//        final Button Bsend = new Button("发送");
+//        Bsend.setBounds(480, 500, 80, 30);
+//        Bsend.setEnabled(false);
+//
+//        //将组件加入框架
+//        f.add(BConnect);
+//        f.add(BDisConnect);
+//        f.add(lb1);
+//        f.add(ta);
+//        f.add(lb2);
+//        f.add(tf);
+//        f.add(Bsend);
+//
+//
+//        //设置框架属性
+//        f.setSize(700, 600);
+//        f.setVisible(true);
+//        f.setResizable(false);
+//        f.setTitle("iChat客户端");
+//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        //连接服务器
+//        BConnect.addActionListener(new ActionListener() {
 //            @Override
-//            public void windowClosing(WindowEvent e) {
-//                System.exit(0);
-//                disConnect();
+//            public void actionPerformed(ActionEvent e) {
+//                try {
+//                    if (!is_online) {
+//                        Client client = new Client();
+//                        socket = new Socket("0.0.0.0", 8080);
+//                        String userName = setName();
+//                        setUserName(userName);
+//                        dataOutputStream = new DataOutputStream(socket.getOutputStream());
+//                        JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_NO_OPTION);
+//                        ta.append("【" + df.format(new Date()) + "】\n" + userName + "上线!\n");
+//                        BDisConnect.setEnabled(true);
+//                        System.out.println("登录成功!");
+//                        Bsend.setEnabled(true);
+//                        is_online = true; // 设置该客户端已经在线
+//                        client.start();
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, "同一客户端不能重复登录!", "错误", JOptionPane.ERROR_MESSAGE);
+//                    }
+//                } catch (SocketTimeoutException e2) {
+//                    JOptionPane.showMessageDialog(null, "登录超时!", "登录提示", JOptionPane.ERROR_MESSAGE);
+//                } catch (UnknownHostException e1) {
+//                    JOptionPane.showMessageDialog(null, "登录超时!", "登录提示", JOptionPane.ERROR_MESSAGE);
+//                    e1.printStackTrace();
+//                } catch (IOException e1) {
+//                    JOptionPane.showMessageDialog(null, "登录失败!", "登录提示", JOptionPane.ERROR_MESSAGE);
+//                    e1.printStackTrace();
+//                } catch (Exception e1) {
+//                    e1.printStackTrace();
+//                }
 //            }
 //        });
-//        textField.addActionListener(new TFLister());
-//        setVisible(true);
-//        connect();
+//
+//        //断开服务器
+//        BDisConnect.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                try {
+//                    dataOutputStream.close();
+//                } catch (IOException e1) {
+//                    e1.printStackTrace();
+//                }
+//                try {
+//                    socket.close();
+//                } catch (IOException e1) {
+//                    e1.printStackTrace();
+//                }
+//                ta.append("【" + df.format(new Date()) + "】\n" + userName + "下线!\n");
+//                BDisConnect.setEnabled(false);
+//                Bsend.setEnabled(false);
+//            }
+//        });
+//
+//        // 发送按钮功能
+//        Bsend.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                String message = tf.getText().trim();
+//                if (message.length() == 0) {
+//                    JOptionPane.showMessageDialog(null, "发送消息不能为空!", "错误", JOptionPane.ERROR_MESSAGE);
+//                } else {
+//                    sendMessage(message);
+//                    ta.append("【" + df.format(new Date()) + "】\n" + getUserName() + ": " + message + "\n");
+//                    tf.setText(null);  //清空输入框
+//                }
+//            }
+//        });
+//
 //    }
-//
-//
-//    //连接服务器
-//    public void connect() {
-//        Scanner scanner = new Scanner(System.in);
-//        String serverIp;
-//        System.out.println("【" + df.format(new Date()) + "】 " + "请设置服务端IP: ");
-//        serverIp = scanner.next();
-//        try {
-//            socket = new Socket(serverIp, 8080);
-//            dataOutputStream = new DataOutputStream(socket.getOutputStream());
-//            System.out.println("登录成功!");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-//
+
     public static void sendMessage(String message) {
         // 建立输出流,向服务端发送信息
 //        Scanner scanner = new Scanner(System.in);
@@ -246,9 +215,8 @@ public class Client extends JFrame {
             ListenerServser listenerServser = new ListenerServser();
             executorService.execute(listenerServser);
             // 建立输出流,向服务端发送信息
-            OutputStream outputStream = socket.getOutputStream();
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
-            PrintWriter printWriter = new PrintWriter(outputStreamWriter, true);
+
+            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
             while (true) {
                 printWriter.println(scanner.nextLine());
             }
@@ -273,13 +241,9 @@ public class Client extends JFrame {
 //        Scanner scanner = new Scanner(System.in);
         String name;
         // 创建输出流
-        OutputStream outputStream = socket.getOutputStream();
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
-        PrintWriter printWriter = new PrintWriter(outputStreamWriter, true);
+        PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
         // 创建输入流
-        InputStream inputStream = socket.getInputStream();
-        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
         while (true) {
             System.out.println("请创建你的昵称: ");
 //            name = scanner.nextLine();
@@ -308,13 +272,11 @@ public class Client extends JFrame {
         @Override
         public void run() {
             try {
-                InputStream inputStream = socket.getInputStream();
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
                 String msgString;
-                while ((msgString = bufferedReader.readLine()) != null) {
+                while ((msgString = bufferedReader.readLine()) != null) {  //TODO while->if
                     System.out.println(msgString);
-//                    ta.append("【" + df.format(new Date()) + "】\n" + msgString);
+                    ta.append("【" + df.format(new Date()) + "】\n" + msgString);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

@@ -4,12 +4,8 @@
     <list default="true" id="762bb98b-897c-48d2-8d30-49c7ac50ef85" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Client$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Client$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Client$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Client$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Client$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Client$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Client$ListenerServser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Client$ListenerServser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/myChat/Socket/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/myChat/Socket/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Socket/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Socket/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Socket/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Socket/Server.java" afterDir="false" />
     </list>
@@ -26,11 +22,11 @@
       <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Socket/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="85" selection-start-line="85" selection-end-line="85" />
+            <state relative-caret-position="646">
+              <caret line="189" column="43" selection-start-line="189" selection-start-column="43" selection-end-line="189" selection-end-column="43" />
               <folding>
-                <element signature="e#2979#2980#0" expanded="true" />
-                <element signature="e#3023#3024#0" expanded="true" />
+                <element signature="e#3045#3046#0" expanded="true" />
+                <element signature="e#3089#3090#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -39,9 +35,10 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Socket/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="291" selection-start-line="291" selection-end-line="291" />
+            <state relative-caret-position="624">
+              <caret line="247" column="38" selection-start-line="247" selection-start-column="38" selection-end-line="247" selection-end-column="38" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="e#1180#1181#0" expanded="true" />
                 <element signature="e#1222#1223#0" expanded="true" />
               </folding>
@@ -70,10 +67,11 @@
       <find>系统通知</find>
       <find>服务端</find>
       <find>exec</find>
-      <find>run</find>
       <find>ListenerServser</find>
       <find>BDisConnect</find>
       <find>if</find>
+      <find>run</find>
+      <find>while</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -109,15 +107,47 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="79" />
-    <option name="width" value="1841" />
-    <option name="height" value="1080" />
+    <option name="x" value="288" />
+    <option name="y" value="76" />
+    <option name="width" value="1380" />
+    <option name="height" value="1004" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Java_Socket" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java_Socket" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java_Socket" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java_Socket" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java_Socket" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java_Socket" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java_Socket" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java_Socket" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Socket" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -277,7 +307,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102309000" />
+    <option name="totallyTimeSpent" value="108490000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -298,29 +328,80 @@
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5002789" side_tool="true" weight="0.3985043" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49972114" weight="0.32692307" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32838982" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3273305" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3273305" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.15672058" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.15839376" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49972114" visible="true" weight="0.3985043" />
       <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.31038135" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info id="Designer" order="3" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32838982" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32944915" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49972114" weight="0.32692307" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="UI Designer" order="4" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49972114" visible="true" weight="0.3985043" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5002789" side_tool="true" weight="0.3985043" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32944915" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.15672058" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32944915" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49972114" weight="0.32692307" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.15672058" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32944915" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49972114" visible="true" weight="0.3985043" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32838982" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5002789" side_tool="true" weight="0.3985043" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32804233" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -333,28 +414,15 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Socket/Server.java</url>
-          <line>83</line>
+          <line>114</line>
           <properties />
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Socket/Client.java</url>
-          <line>275</line>
-          <properties />
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Socket/Client.java</url>
-          <line>291</line>
-          <properties />
-          <option name="timeStamp" value="48" />
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="49" />
+      <option name="time" value="72" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GUI/src/Client.java" />
     <entry file="file://$PROJECT_DIR$/GUI/src/Client.form" />
     <entry file="file://$PROJECT_DIR$/src/Socket/Login.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -458,7 +526,7 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="6" selection-start-column="6" selection-end-column="6" />
+          <caret column="7" lean-forward="true" selection-start-column="7" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -488,75 +556,54 @@
     <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/javax/swing/JFrame.java" />
     <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/TextComponent.java" />
     <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/lang/Object.java" />
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/Component.java" />
     <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/TextField.java" />
-    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/lang/Thread.java" />
-    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/Object.java">
+    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/Object.java" />
+    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/String.java" />
+    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/AbstractStringBuilder.java" />
+    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/StringBuilder.java" />
+    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/util/Date.java" />
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/io/BufferedReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="826" selection-start-line="826" selection-end-line="826" />
+        <state relative-caret-position="207">
+          <caret line="387" column="18" selection-start-line="387" selection-start-column="18" selection-end-line="387" selection-end-column="18" />
           <folding>
-            <element signature="e#22786#22787#0" expanded="true" />
-            <element signature="e#22821#22822#0" expanded="true" />
+            <element signature="e#3011#3012#0" expanded="true" />
+            <element signature="e#3058#3059#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/AbstractStringBuilder.java">
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/lang/Thread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="450" selection-start-line="450" selection-end-line="450" />
-          <folding>
-            <element signature="e#1327#1328#0" expanded="true" />
-            <element signature="e#1369#1370#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="202">
+          <caret line="1122" column="35" selection-start-line="1122" selection-start-column="35" selection-end-line="1122" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/lang/StringBuilder.java">
+    <entry file="jar:///usr/lib/jvm/java/jdk1.8.0_181/src.zip!/java/awt/Component.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="136" selection-start-line="136" selection-end-line="136" />
-          <folding>
-            <element signature="e#2871#2872#0" expanded="true" />
-            <element signature="e#2896#2897#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/java/jdk/jdk1.8.0_181/src.zip!/java/util/Date.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="165" selection-start-line="165" selection-end-line="165" />
-          <folding>
-            <element signature="e#6390#6391#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="207">
+          <caret line="1028" column="16" selection-start-line="1028" selection-start-column="16" selection-end-line="1028" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Socket/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="85" selection-start-line="85" selection-end-line="85" />
+        <state relative-caret-position="646">
+          <caret line="189" column="43" selection-start-line="189" selection-start-column="43" selection-end-line="189" selection-end-column="43" />
           <folding>
-            <element signature="e#2979#2980#0" expanded="true" />
-            <element signature="e#3023#3024#0" expanded="true" />
+            <element signature="e#3045#3046#0" expanded="true" />
+            <element signature="e#3089#3090#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Socket/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="291" selection-start-line="291" selection-end-line="291" />
+        <state relative-caret-position="624">
+          <caret line="247" column="38" selection-start-line="247" selection-start-column="38" selection-end-line="247" selection-end-column="38" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#1180#1181#0" expanded="true" />
             <element signature="e#1222#1223#0" expanded="true" />
           </folding>
