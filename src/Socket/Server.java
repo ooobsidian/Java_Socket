@@ -79,11 +79,6 @@ public class Server {
                 System.out.println("【" + df.format(new Date()) + "】 " + "客户端:" + inetAddress.getHostAddress() + "上线!");
                 System.out.println("【" + df.format(new Date()) + "】 " + "当前聊天室在线人数为: " + (stringPrintWriterMap.size() + 1));
                 executorService.execute(new ListenerClient(socket)); //通过线程池来分配线程
-                /***自己写****/
-                Scanner in = new Scanner(System.in);
-                String notice = in.nextLine();
-                if (notice != null)
-                    sendMessageToAll("【" + df.format(new Date()) + "】 " + "服务器: " + notice);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,9 +130,6 @@ public class Server {
                 sendMessageToAll("【" + df.format(new Date()) + "】 " + "[系统通知]: " + name + "已上线!");
                 // 读入服务端消息
                 //TODO 无法读入服务端输入,读入之后就会和其他东西冲突,把原来if改成while能循环读入服务器的消息,但是会将客户端卡死
-                Scanner in = new Scanner(System.in);
-                String notice = in.nextLine();
-                sendMessageToAll("【" + df.format(new Date()) + "】 " + "服务器: " + notice);
                 // 通过客户端的Socket获取输入流
                 // 读取客户端发送来的信息
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
