@@ -62,7 +62,7 @@ public class Server {
     private synchronized void sendMessageToSomeone(String name, String message) {
         PrintWriter printWriter = stringPrintWriterMap.get(name);
         if (printWriter != null) {
-            printWriter.println(message);
+            printWriter.println("[ta在私聊你]"+message);
         } else if (printWriter == null) {
             JOptionPane.showMessageDialog(null, "用户\"" + name + "\"不在线或不存在!", "错误", JOptionPane.ERROR_MESSAGE);
         }
@@ -127,7 +127,7 @@ public class Server {
                 name = getName();
                 addClient(name, printWriter);
                 Thread.sleep(100);
-                sendMessageToAll("【" + df.format(new Date()) + "】\n" + "[系统通知]: " + name + "已上线!");
+                sendMessageToAll("[系统通知]: " + name + "已上线!");
                 // 读入服务端消息
                 // 通过客户端的Socket获取输入流
                 // 读取客户端发送来的信息
@@ -158,7 +158,7 @@ public class Server {
             } finally {
                 remove(name);
                 // 通知所有用户,某用户已经下线
-                sendMessageToAll("【" + df.format(new Date()) + "】\n" + "[系统通知]: " + name + "已下线!");
+                sendMessageToAll("[系统通知]: " + name + "已下线!");
                 if (socket != null) {
                     try {
                         socket.close();
