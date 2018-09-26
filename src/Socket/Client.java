@@ -26,15 +26,11 @@ import java.util.concurrent.Executors;
  */
 public class Client extends JFrame {
     static private Socket socket;
-    private TextField textField = new TextField();
-    private TextArea textArea = new TextArea();
     private static DataOutputStream dataOutputStream = null;
-    static String current = null;
     static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
     static private boolean is_online = false;   //客户端是否在线标志
     static String userName;
     static TextArea ta;
-    static TextField tf;
 
     public static void setUserName(String userName) {
         Client.userName = userName;
@@ -48,11 +44,6 @@ public class Client extends JFrame {
     public Client() {
     }
 
-//    public static void main(String... args) throws IOException {
-//        socket = new Socket("0.0.0.0", 8080);
-//        Client client = new Client();
-//        client.start();
-//    }
 
     public static void main(String... args) {
         JFrame f = new JFrame();
@@ -72,26 +63,20 @@ public class Client extends JFrame {
         lb1.setBounds(10, 55, 300, 20);
 
         //系统消息框
-        final TextArea ta = new TextArea();
+        ta = new TextArea();
         ta.setBackground(Color.LIGHT_GRAY);
         ta.setEditable(false);
-        ta.setBounds(10, 80, 400, 400);
-
-        //当前在线好友列表标签
-        Label lb2 = new Label("----在线好友列表----");
-        lb2.setBounds(450, 55, 200, 20);
-
-        //当前在线好友列表
+        ta.setBounds(10, 80, 680, 400);
 
 
         //发送框
         final TextField tf = new TextField();
         tf.setEditable(true);
-        tf.setBounds(10, 500, 400, 30);
+        tf.setBounds(10, 500, 550, 30);
 
         //发送按钮
         final Button Bsend = new Button("发送");
-        Bsend.setBounds(480, 500, 80, 30);
+        Bsend.setBounds(590, 500, 80, 30);
         Bsend.setEnabled(false);
 
         //将组件加入框架
@@ -99,7 +84,6 @@ public class Client extends JFrame {
         f.add(BDisConnect);
         f.add(lb1);
         f.add(ta);
-        f.add(lb2);
         f.add(tf);
         f.add(Bsend);
 
@@ -123,11 +107,10 @@ public class Client extends JFrame {
                         dataOutputStream = new DataOutputStream(socket.getOutputStream());
                         JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_NO_OPTION);
                         System.out.println("登录成功!");
-                        ta.append("【" + df.format(new Date()) + "】\n" + userName + "上线!\n");
                         BDisConnect.setEnabled(true);
                         Bsend.setEnabled(true);
                         is_online = true; // 设置该客户端已经在线
-                        client.start();  //TODO ??不知为何去掉这句话就可以用了
+                        client.start();
                     } else {
                         JOptionPane.showMessageDialog(null, "同一客户端不能重复登录!", "错误", JOptionPane.ERROR_MESSAGE);
                     }
@@ -179,7 +162,6 @@ public class Client extends JFrame {
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
-                    ta.append("【" + df.format(new Date()) + "】\n" + getUserName() + ": " + message + "\n");
                     tf.setText(null);  //清空输入框
                 }
             }
@@ -196,15 +178,8 @@ public class Client extends JFrame {
 
     public void start() {
         try {
-//            Scanner scanner = new Scanner(System.in);
-            // 接收服务器端发送过来的信息的线程启动
             ExecutorService executorService = Executors.newCachedThreadPool();
             executorService.execute(new ListenerServser());
-            // 建立输出流,向服务端发送信息
-//            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
-//            while (true) {
-//                printWriter.println(scanner.nextLine());
-//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -238,9 +213,6 @@ public class Client extends JFrame {
         return name;
     }
 
-    public static void printToScreen(String message) {
-        ta.append("【" + df.format(new Date()) + "】\n" + message + "\n");
-    }
 
     // 循环读取服务端发送过来的信息并输出到客户端的控制台
     class ListenerServser implements Runnable {
@@ -250,9 +222,8 @@ public class Client extends JFrame {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
                 String msgString;
                 while ((msgString = bufferedReader.readLine()) != null) {
-                    System.out.println(msgString + "!!?!!");
-                    printToScreen(msgString);
-//                    ta.append("【" + df.format(new Date()) + "】\n" + msgString + "\n");
+                    if (msgString != "")
+                        ta.append("【" + df.format(new Date()) + "】\n" + msgString + "\n");
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

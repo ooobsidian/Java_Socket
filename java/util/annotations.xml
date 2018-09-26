@@ -1,0 +1,5 @@
+<root>
+    <item name='java.util.Map int size()'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

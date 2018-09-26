@@ -72,12 +72,12 @@ public class Server {
         try {
 
             while (true) {
-                System.out.println("【" + df.format(new Date()) + "】 " + "等待客户端连接...");
+                System.out.println("【" + df.format(new Date()) + "】\n" + "等待客户端连接...\n");
                 Socket socket = serverSocket.accept();
                 // 获取客户端的ip
                 InetAddress inetAddress = socket.getInetAddress();
-                System.out.println("【" + df.format(new Date()) + "】 " + "客户端:" + inetAddress.getHostAddress() + "上线!");
-                System.out.println("【" + df.format(new Date()) + "】 " + "当前聊天室在线人数为: " + (stringPrintWriterMap.size() + 1));
+                System.out.println("【" + df.format(new Date()) + "】\n" + "客户端:" + inetAddress.getHostAddress() + "上线!\n");
+                System.out.println("【" + df.format(new Date()) + "】\n" + "当前聊天室在线人数为: " + (stringPrintWriterMap.size() + 1) + "\n");
                 executorService.execute(new ListenerClient(socket)); //通过线程池来分配线程
             }
         } catch (Exception e) {
@@ -127,9 +127,8 @@ public class Server {
                 name = getName();
                 addClient(name, printWriter);
                 Thread.sleep(100);
-                sendMessageToAll("【" + df.format(new Date()) + "】 " + "[系统通知]: " + name + "已上线!");
+                sendMessageToAll("【" + df.format(new Date()) + "】\n" + "[系统通知]: " + name + "已上线!");
                 // 读入服务端消息
-                //TODO 无法读入服务端输入,读入之后就会和其他东西冲突,把原来if改成while能循环读入服务器的消息,但是会将客户端卡死
                 // 通过客户端的Socket获取输入流
                 // 读取客户端发送来的信息
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
@@ -159,7 +158,7 @@ public class Server {
             } finally {
                 remove(name);
                 // 通知所有用户,某用户已经下线
-                sendMessageToAll("【" + df.format(new Date()) + "】 " + "[系统通知]: " + name + "已下线!");
+                sendMessageToAll("【" + df.format(new Date()) + "】\n" + "[系统通知]: " + name + "已下线!");
                 if (socket != null) {
                     try {
                         socket.close();
