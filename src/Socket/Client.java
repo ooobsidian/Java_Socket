@@ -31,6 +31,7 @@ public class Client extends JFrame {
     static private boolean is_online = false;   //客户端是否在线标志
     static String userName;
     static TextArea ta;
+    static TextField nameField;
 
     public static void setUserName(String userName) {
         Client.userName = userName;
@@ -51,12 +52,22 @@ public class Client extends JFrame {
 
         //连接服务器的按钮
         final Button BConnect = new Button("上线");
-        BConnect.setBounds(10, 10, 100, 30);
+        BConnect.setBounds(10, 10, 100, 35);
 
         //断开服务器按钮
         final Button BDisConnect = new Button("下线");
-        BDisConnect.setBounds(120, 10, 100, 30);
+        BDisConnect.setBounds(120, 10, 100, 35);
         BDisConnect.setEnabled(false);
+
+        //当前用户昵称标签
+        Label label=new Label("当前昵称: ");
+        label.setBounds(400,13,70,30);
+
+        //当前用户昵称
+        nameField=new TextField();
+        nameField.setEditable(false);
+        nameField.setBackground(Color.white);
+        nameField.setBounds(470,13,150,30);
 
         //系统消息框标签
         Label lb1 = new Label("----消息框----");
@@ -82,6 +93,8 @@ public class Client extends JFrame {
         //将组件加入框架
         f.add(BConnect);
         f.add(BDisConnect);
+        f.add(label);
+        f.add(nameField);
         f.add(lb1);
         f.add(ta);
         f.add(tf);
@@ -91,7 +104,7 @@ public class Client extends JFrame {
         f.setSize(700, 600);
         f.setVisible(true);
         f.setResizable(false);
-        f.setTitle("iChat客户端");
+        f.setTitle("iChat聊天室");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //连接服务器
@@ -107,6 +120,7 @@ public class Client extends JFrame {
                         dataOutputStream = new DataOutputStream(socket.getOutputStream());
                         JOptionPane.showConfirmDialog(null, "登录成功!", "登录提示", JOptionPane.YES_NO_OPTION);
                         System.out.println("登录成功!");
+                        nameField.setText(userName);
                         BDisConnect.setEnabled(true);
                         Bsend.setEnabled(true);
                         is_online = true; // 设置该客户端已经在线
@@ -143,6 +157,7 @@ public class Client extends JFrame {
                     e1.printStackTrace();
                 }
                 ta.append("【" + df.format(new Date()) + "】\n" + userName + "下线!\n");
+                nameField.setText("");
                 BDisConnect.setEnabled(false);
                 Bsend.setEnabled(false);
                 is_online = false;
